@@ -1,8 +1,6 @@
-Flask==3.0.0
-flask-cors==4.0.0
-tensorflow
-Pillow
+Flask
+flask-cors
 numpy
-Werkzeug
+pillow
+tensorflow==2.15.0
 gunicorn
-python-3.10.13
