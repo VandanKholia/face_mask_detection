@@ -10,9 +10,6 @@ env/
 # Dataset
 data/
 
-# Model
-*.h5
-
 # OS files
 .DS_Store
 
