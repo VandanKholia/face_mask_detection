@@ -12,9 +12,10 @@ app = Flask(__name__)
 CORS(app)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, 'face_mask_model.h5')
+MODEL_PATH = os.path.join(BASE_DIR, 'face_mask_model.keras')
 
-model = load_model(MODEL_PATH)
+
+model = load_model(MODEL_PATH, compile=False)
 
 def preprocess_image(image_file):
     img = Image.open(image_file)
