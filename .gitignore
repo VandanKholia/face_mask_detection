@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+env/
+
+# Dataset
+data/
+
+# Model
+*.h5
+
+# OS files
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Output files
+*.out
+
+
