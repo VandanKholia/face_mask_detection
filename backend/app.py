@@ -12,7 +12,7 @@ app = Flask(__name__)
 CORS(app)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, 'face_mask_model.keras')
+MODEL_PATH = os.path.join(BASE_DIR, 'face_mask_model.h5')
 
 
 model = load_model(MODEL_PATH, compile=False)
