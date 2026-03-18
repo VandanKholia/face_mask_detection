@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback } from 'react';
 import './App.css';
 
-const API_URL = 'http://localhost:5000/predict';
+const API_URL = 'https://face-mask-detection-backend.onrender.com/predict';
 
 function App() {
   const [selectedFile, setSelectedFile] = useState(null);
