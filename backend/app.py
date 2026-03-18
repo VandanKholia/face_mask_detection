@@ -47,7 +47,8 @@ def predict():
 
         return jsonify({
             'label': label,
-            'confidence': confidence
+            'confidence': confidence,
+            'label_index': int(label_index)
         })
 
     except Exception as e:
