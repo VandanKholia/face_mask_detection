@@ -4,7 +4,6 @@ tf.config.set_visible_devices([], 'GPU')
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from tensorflow.keras.models import load_model
 from PIL import Image
 import numpy as np
 
@@ -12,10 +11,13 @@ app = Flask(__name__)
 CORS(app)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, 'face_mask_model.h5')
+MODEL_PATH = os.path.join(BASE_DIR, 'model.tflite')
 
 
-model = load_model(MODEL_PATH, compile=False)
+interpreter = tf.lite.Interpreter(model_path=MODEL_PATH)
+interpreter.allocate_tensors()
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
 
 def preprocess_image(image_file):
     img = Image.open(image_file)
@@ -33,8 +35,11 @@ def predict():
     file = request.files['file']
 
     try:
-        processed_image = preprocess_image(file)
-        prediction = model.predict(processed_image)
+        processed_image = preprocess_image(file).astype(np.float32)
+        
+        interpreter.set_tensor(input_details[0]['index'], processed_image)
+        interpreter.invoke()
+        prediction = interpreter.get_tensor(output_details[0]['index'])
 
         label_index = np.argmax(prediction)
         label = "With Mask" if label_index == 1 else "Without Mask"
